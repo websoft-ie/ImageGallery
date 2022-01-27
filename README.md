@@ -1,5 +1,6 @@
 
 ## Example
+![alt text](https://github.com/websoft-ie/ImageGallery/blob/main/images/exhibition_main.png?raw=true)
 ![alt text](https://github.com/websoft-ie/ImageGallery/blob/main/images/exhibition_id.png?raw=true)
 ## Usage
 
