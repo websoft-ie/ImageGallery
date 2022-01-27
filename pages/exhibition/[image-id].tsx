@@ -2,11 +2,13 @@
 import { useRouter } from 'next/router';
 import React, { useState } from "react";
 import { Box, Center, Container, Text, Wrap, WrapItem, Flex, Stack, HStack, VStack, Button, ButtonGroup } from "@chakra-ui/react";
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import Image from "next/image";
 import {getCuratedPhotos} from "../../lib/api";
 
 export default function IndexedImage(data) {
-  const { query } = useRouter();
+  const router = useRouter()
+
   const [photo, setPhoto] = useState(data);
   const myLoader=({src})=>{
     return photo.data.image_id === null ? 
@@ -24,10 +26,11 @@ export default function IndexedImage(data) {
   return (
     <div>
       <Box overflow="hidden" bg="purple.100" minH="100vh">
+        <ArrowBackIcon mt={5} w={8} h={8} onClick={() => router.back()}/>
         <Container maxW='container.xl' mt={40}>
           <VStack>
             <HStack width={800}>
-              <Text>{photo.data.title}</Text>
+              <Text fontSize='xl'>{photo.data.title}</Text>
               <Text fontSize='xs' my="1"> {photo.data.aic_start_at.substr(0, 10)} -  {photo.data.aic_end_at ? photo.data.aic_end_at.substr(0, 10) : "Present"}</Text> 
             </HStack>
             <Flex>

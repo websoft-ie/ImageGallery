@@ -25,8 +25,8 @@ export default function Home({data, pageNumber}) {
       setPhotos(photos.concat(_data))  
     }
   }
-  const clickItem = () => {
-    // Router.push('/about')
+  const clickItem = (id) => {
+    Router.push(`/exhibition/${id}`)
   }
 
   return (
@@ -52,10 +52,11 @@ export default function Home({data, pageNumber}) {
               {photos.map((pic) => (
                 <WrapItem
                   key={pic.id}
+                  id={pic.id}
                   boxShadow="base"
                   overflow="hidden"
                   _hover={{ boxShadow: "dark-lg" }}
-                  onClick={clickItem}
+                  onClick={() => clickItem(pic.id)}
                 >
                   <VStack spacing='24px' justify="left">
                     {
