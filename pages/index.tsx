@@ -14,6 +14,9 @@ export default function Home({data, pageNumber}) {
   const myLoader=({src})=>{
     return `https://www.artic.edu/${src}`;
   }
+  const myLoader_1=({src})=>{
+    return `https://artic-web.imgix.net/${src}`;
+  }  
   const loadMore = async () => {
     console.log("Loading More...")
     pageIndex += 1
@@ -55,7 +58,15 @@ export default function Home({data, pageNumber}) {
                   onClick={clickItem}
                 >
                   <VStack spacing='24px' justify="left">
-                    <Image my="1" loader={myLoader} src={`/iiif/2/${pic.image_id}/full/843,/0/default.jpg`} height={200} width={200} alt={pic.id} />
+                    {
+                      pic.image_id === null && (pic.hasOwnProperty('image_url') && pic.image_url !== null) ? 
+                      (<Image my="1" loader={myLoader_1} 
+                        src={`${pic.image_url.replace("https://artic-web.imgix.net", "")}`} 
+                        height={200} width={200} alt={pic.id} />) :
+                      (<Image my="1" loader={myLoader} 
+                        src={`/iiif/2/${pic.image_id}/full/843,/0/default.jpg`} 
+                        height={200} width={200} alt={pic.id}/>)
+                    }                    
                     <Text fontSize='sm' my="1"> {pic.title.length > 10 ? pic.title.substr(0, 11) : pic.title} </Text> 
                     <Text fontSize='xs' my="1"> {pic.aic_start_at.substr(0, 10)} -  {pic.aic_end_at ? pic.aic_end_at.substr(0, 10) : "Present"}</Text> 
                   </VStack>               

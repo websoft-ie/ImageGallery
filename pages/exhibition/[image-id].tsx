@@ -9,7 +9,9 @@ export default function IndexedImage(data) {
   const { query } = useRouter();
   const [photo, setPhoto] = useState(data);
   const myLoader=({src})=>{
-    return `https://www.artic.edu/${src}`;
+    return photo.data.image_id === null ? 
+      `https://artic-web.imgix.net/${src}` :
+      `https://www.artic.edu/${src}`;
   }
   
   if (photo.data === "404 Error") {
@@ -38,8 +40,16 @@ export default function IndexedImage(data) {
                     _hover={{ boxShadow: "dark-lg" }}
                   >
                     <VStack spacing='24px'>
-                      <Image my="1" loader={myLoader} src={`/iiif/2/${photo.data.image_id}/full/843,/0/default.jpg`} height={200} width={200} alt={photo.data.id} />
-                      </VStack>               
+                      {
+                        photo.data.image_id === null ? 
+                        (<Image my="1" loader={myLoader} 
+                          src={`${photo.data.image_url.replace("https://artic-web.imgix.net", "")}`} 
+                          height={200} width={200} alt={photo.data.id} />) :
+                        (<Image my="1" loader={myLoader} 
+                        src={`/iiif/2/${photo.data.image_id}/full/843,/0/default.jpg`} 
+                        height={200} width={200} alt={photo.data.id} />)
+                      }
+                    </VStack>               
                   </WrapItem>
                 </Wrap> 
               </Box>
