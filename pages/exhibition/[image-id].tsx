@@ -41,7 +41,7 @@ export default function IndexedImage(data) {
                   >
                     <VStack spacing='24px'>
                       {
-                        photo.data.image_id === null ? 
+                        photo.data.image_id === null && (photo.data.hasOwnProperty('image_url') && photo.data.image_url !== null) ? 
                         (<Image my="1" loader={myLoader} 
                           src={`${photo.data.image_url.replace("https://artic-web.imgix.net", "")}`} 
                           height={200} width={200} alt={photo.data.id} />) :
