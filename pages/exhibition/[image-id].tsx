@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { Box, Center, Container, Text, Wrap, WrapItem, Flex, Stack, HStack, VStack, Button, ButtonGroup } from "@chakra-ui/react";
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import Image from "next/image";
-import {getCuratedPhotos} from "../../lib/api";
 
 export default function IndexedImage(data) {
   const router = useRouter()
